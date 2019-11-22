@@ -6,7 +6,7 @@
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://yoursite.com/"/>
-  <updated>2019-11-22T01:25:39.132Z</updated>
+  <updated>2019-11-22T01:34:54.731Z</updated>
   <id>http://yoursite.com/</id>
   
   <generator uri="https://hexo.io/">Hexo</generator>
@@ -16,7 +16,7 @@
     <link href="http://yoursite.com/2019/11/22/VS-Code-C-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/"/>
     <id>http://yoursite.com/2019/11/22/VS-Code-C-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/</id>
     <published>2019-11-22T01:20:23.000Z</published>
-    <updated>2019-11-22T01:25:39.132Z</updated>
+    <updated>2019-11-22T01:34:54.731Z</updated>
     
     <content type="html"><![CDATA[<p>偶然在知乎看到说可以用VS Code这个写Java我照着试了试，发现配置起来挺简单的。捣鼓完了之后想着把C++的也给配置了吧，然后上网找文章，发现文章是挺多的，也足够的面向小白，但是我觉得这些文章很多会手把手教你怎么配置task.json、launch.json之类的，但是很少告诉你里面这些参数是干什么的，为什么要这么配置。我发现官方文档在这一点上说的挺清楚的其实，但是文档是全英文的，有的人看起来可能有点费劲，看完后我想在这里整理一下，权当记录。</p><a id="more"></a><p>以下的内容是基于<a href="https://code.visualstudio.com/docs/cpp/config-mingw" target="_blank" rel="noopener">官方的文档</a>作一定的扩展.</p><h2 id="预备环境"><a href="#预备环境" class="headerlink" title="预备环境"></a>预备环境</h2><p>首先我们要准备以下这些东西：</p><ol><li>Visual Studio Code. 这个直接上官网下载即可</li><li>在VS Code中安装C/C++扩展，进入后在左边的菜单栏里有一个四个小格子凑一起的标志，鼠标放上面能够看到extension的字样，或者ctrl+shift+x</li><li>安装<a href="https://sourceforge.net/projects/mingw-w64/files/" target="_blank" rel="noopener">Mingw-w64</a>，并且确保安装路径上没有空格，安装的时候注意不要使用默认的安装目录。而且记好安装目录，后面要用。</li><li>将Mingw-w64添加到环境变量，win10用户可以打开控制面板-系统-高级系统设置-环境变量，进入编辑页面，选中path，点击编辑，然后新建一个条目，输入Mingw-w64的安装路径，点击确定。在命令行中输入gcc -v查看是否安装和添加成功(win+r 输入cmd回车进入)。</li></ol><h2 id="创造一个工作空间"><a href="#创造一个工作空间" class="headerlink" title="创造一个工作空间"></a>创造一个工作空间</h2><p>其实就是个文件夹，比如命名为project，然后在这个文件夹下面再建一个文件夹(helloword)，然后在VS Code里打开这个helloword。这两者更具体的关系后面有机会再补充。之后我们需要配置一下我们的编译器，然后才能用VS Code愉快地敲代码，配置完成后会产生一个”.vscode”文件夹，里面会有以下三个文件：</p><ul><li>c_cpp_properties.json(编译器路径和自带的Intellisense设置)</li><li>tasks.json(配置构建指令，即build)</li><li>launch.json(debugger配置)</li></ul><h2 id="配置编译器路径"><a href="#配置编译器路径" class="headerlink" title="配置编译器路径"></a>配置编译器路径</h2><ol><li>ctrl+shift+p打开命令面板(Command Palette).: <img src="/VS-Code-C-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/command-palette.png" alt="Command Palette"></li><li>在搜索框中输入”C/C++”然后选择”Edit configurations(UI)”打开”C/C++ IntelliSense Configuration”页面。当你改变这个页面的设置的时候，VS Code会自动在”.vscode”文件夹中生成一个”c_cpp_properties.json”文件并将这些设置写入该文件。<img src="/VS-Code-C-%E7%8E%AF%E5%A2%83%E9%85%8D%E7%BD%AE/intellisense-configurations-mingw.png" alt=""></li><li>找到”Complier path”这个设置，VS Code会根据在系统上找到的内容尝试使用默认编译器填充。首先会寻找MSVC编译器，然后是WSL(Windows Subsystem for Linux)上的g++，然后是Mingw-w64的g++。如果你安装了VS或者WSL，那就需要更改这里的编译器路径，将这里的路径改为上文里安装路径里的bin文件夹中的g++.exe的路径即可。</li></ol>]]></content>
     
